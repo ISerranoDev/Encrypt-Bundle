@@ -8,7 +8,7 @@ Este bundle proporciona funcionalidad de encriptación para entidades de Doctrin
 
 1. Instala el bundle usando Composer:
 ```bash
-composer require iserrano-dev/encrypt-bundle
+composer require iserranodev/encrypt-bundle
 ```
 
 2. Habilita el bundle en `config/bundles.php`:
