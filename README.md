@@ -1,4 +1,6 @@
 # Encrypt Bundle
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/ISerranoDev/Encrypt-Bundle/blob/main/README.en.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/ISerranoDev/Encrypt-Bundle/blob/main/README.md)
 
 Este bundle proporciona funcionalidad de encriptación para entidades de Doctrine en aplicaciones Symfony.
 
@@ -52,7 +54,12 @@ php bin/console app:generate-key
 2. Usa el atributo `#[Encrypted]` en las propiedades que desees encriptar:
 ```php
 use ISerranoDev\EncryptBundle\Attribute\Encrypted;
+use App\EventListener\EncryptListener;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity()]
+#[ORM\Table(name: 'users')]
+#[ORM\EntityListeners([EncryptListener::class])]
 class User
 {
     #[ORM\Column(type: 'string', length: 255)]
