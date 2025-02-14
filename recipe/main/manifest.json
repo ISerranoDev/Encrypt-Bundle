@@ -1,0 +1,15 @@
+{
+  "bundles": {
+    "ISerranoDev\\EncryptBundle\\ISerranoDEvEncryptBundle": ["all"]
+  },
+  "copy-from-recipe": {
+    "config/": "%CONFIG_DIR%/",
+    ".env": ".env"
+  },
+  "extra": {
+    "symfony": {
+      "recipe-dir": "recipe",
+      "recipe-branch": "main"
+    }
+  }
+}
