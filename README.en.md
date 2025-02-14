@@ -8,7 +8,7 @@ This bundle provides encryption functionality for Doctrine entities in Symfony a
 
 1. Install the bundle using Composer:
 ```bash
-composer require iserrano-dev/encrypt-bundle
+composer require iserranodev/encrypt-bundle
 ```
 
 2. Enable the bundle in `config/bundles.php`:
