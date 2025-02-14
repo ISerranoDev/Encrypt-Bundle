@@ -1,5 +1,6 @@
 {
   "name": "iserranodev/encrypt-bundle",
+  "version": "1.0.0",
   "type": "symfony-bundle",
   "description": "A Symfony bundle for encrypting entity properties in Database",
   "keywords": ["symfony", "bundle", "encryption", "doctrine"],
