@@ -18,7 +18,8 @@
     "doctrine/doctrine-migrations-bundle": "^3.2",
     "doctrine/orm": "^2.16",
     "paragonie/halite": "^5.0",
-    "symfony/console": "^6.0|^7.0"
+    "symfony/console": "^6.0|^7.0",
+    "symfony/filesystem": "^6.0|^7.0"
   },
   "autoload": {
     "psr-4": {
@@ -33,5 +34,10 @@
   "require-dev": {
     "phpunit/phpunit": "^9.5",
     "symfony/phpunit-bridge": "^6.0|^7.0"
+  },
+  "scripts": {
+    "post-package-uninstall": [
+      "ISerranoDev\\EncryptBundle\\Composer\\ScriptHandler::removeConfig"
+    ]
   }
 }
