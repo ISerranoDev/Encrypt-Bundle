@@ -35,9 +35,5 @@
     "phpunit/phpunit": "^9.5",
     "symfony/phpunit-bridge": "^6.0|^7.0"
   },
-  "scripts": {
-    "pre-package-uninstall": [
-      "ISerranoDev\\EncryptBundle\\Composer\\ScriptHandler::removeConfig"
-    ]
-  }
+
 }

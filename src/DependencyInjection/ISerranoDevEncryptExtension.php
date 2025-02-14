@@ -70,4 +70,42 @@ EOT;
             file_put_contents($configFile, $configContent);
         }
     }
+
+    /**
+     * Método para limpiar los archivos cuando se desinstala el bundle
+     */
+    public function remove(): void
+    {
+        $filesystem = new Filesystem();
+        $projectDir = $this->getProjectDir();
+
+        try {
+            // Eliminar archivo de configuración
+            $configFile = $projectDir . '/config/packages/i_serrano_dev_encrypt.yaml';
+            if ($filesystem->exists($configFile)) {
+                $filesystem->remove($configFile);
+                echo "Config file removed successfully\n";
+            }
+
+            // Eliminar variables de entorno
+            $envFile = $projectDir . '/.env';
+            if ($filesystem->exists($envFile)) {
+                $content = file_get_contents($envFile);
+                $content = preg_replace(
+                    '/###> iserranodev\/encrypt-bundle ###.*###< iserranodev\/encrypt-bundle ###\n?/s',
+                    '',
+                    $content
+                );
+                file_put_contents($envFile, $content);
+                echo "Environment variables removed successfully\n";
+            }
+        } catch (\Exception $e) {
+            echo "Error during cleanup: " . $e->getMessage() . "\n";
+        }
+    }
+
+    private function getProjectDir(): string
+    {
+        return getcwd();
+    }
 }
