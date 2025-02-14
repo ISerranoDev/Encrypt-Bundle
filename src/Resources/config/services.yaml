@@ -1,0 +1,33 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  ISerranoDev\EncryptBundle\Service\EncryptService:
+    arguments:
+      $hashKey: '%env(resolve:ISD_ENCRYPT_HASH_KEY)%'
+      $method: '%env(resolve:ISD_ENCRYPT_METHOD)%'
+      $iv: '%env(resolve:ISD_ENCRYPT_IV)%'
+      $keyPath: '%i_serrano_dev_encrypt.encryption_key_path%'
+
+  ISerranoDev\EncryptBundle\Command\GenerateKeyCommand:
+    arguments:
+      $filesystem: '@filesystem'
+      $keyPath: '%i_serrano_dev_encrypt.encryption_key_path%'
+    tags:
+      - { name: 'console.command' }
+
+  ISerranoDev\EncryptBundle\EventListener\EncryptListener:
+    arguments:
+      $encryptService: '@ISerranoDev\EncryptBundle\Service\EncryptService'
+      $entityManager: '@doctrine.orm.entity_manager'
+    tags:
+      - { name: 'doctrine.orm.entity_listener', event: 'preFlush' }
+      - { name: 'doctrine.orm.entity_listener', event: 'postLoad' }
+
+  ISerranoDev\EncryptBundle\Doctrine\Migrations\EncryptAwareMigrationFactory:
+    arguments:
+      $connection: '@doctrine.dbal.default_connection'
+      $logger: '@logger'
+      $encryptService: '@ISerranoDev\EncryptBundle\Service\EncryptService'
