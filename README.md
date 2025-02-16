@@ -79,6 +79,8 @@ Puedes usar dicho servicio para encriptar o hashear diferentes textos.
 El atributo Encrypted usa los métodos hashData y unHashData para poder buscar en base de datos, pero si fuese necesario, también existe el método
 encryptData y decryptData, el cual no es recomendable para el uso de campos que se pretenden buscar.
 
+En caso de usar los métodos de encrypt, consultar la librería https://github.com/paragonie/halite, ya que el cifrado de los datos con estos métodos están desarrollados mediante dicha librería.
+
 ## Ubicación de la Clave de Encriptación
 
 Por defecto, el archivo de clave se guarda en:
