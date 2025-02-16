@@ -34,10 +34,10 @@ ISD_ENCRYPT_IV=5414358938341622
 
 ### Bundle Configuration
 
-You can customize the configuration in `config/packages/isd_encrypt.yaml`:
+You can customize the configuration in `config/packages/i_serrano_dev_encrypt.yaml`:
 
 ```yaml
-isd_encrypt:
+i_serrano_dev_encrypt:
     encryption_key_path: '%kernel.project_dir%/encryption/encryption.key'  # Default path
     hash_key: 'YourNewHashKey'    # Optional: overrides ISD_ENCRYPT_HASH_KEY
     method: 'YourNewMethod'       # Optional: overrides ISD_ENCRYPT_METHOD
@@ -72,6 +72,12 @@ class User
    - Encrypts data before storing it in the database
    - Decrypts data when retrieving it
    - Handles Doctrine migrations correctly
+
+## Using EncryptService
+
+You can use this service to encrypt or hash different texts.
+The Encrypted attribute uses the hashData and unHashData methods to search the database, but if necessary, there is also the
+encryptData and decryptData methods, which are not recommended for use with fields that are intended to be searched.
 
 ## Encryption Key Location
 
