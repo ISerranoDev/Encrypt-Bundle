@@ -79,6 +79,8 @@ You can use this service to encrypt or hash different texts.
 The Encrypted attribute uses the hashData and unHashData methods to search the database, but if necessary, there is also the
 encryptData and decryptData methods, which are not recommended for use with fields that are intended to be searched.
 
+If you use encrypt methods, consult the library https://github.com/paragonie/halite, since data encryption with these methods is developed using said library.
+
 ## Encryption Key Location
 
 By default, the key file is stored in:
