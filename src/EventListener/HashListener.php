@@ -14,7 +14,7 @@ use ReflectionClass;
 
 #[AsEntityListener(event: Events::preFlush, method: 'preFlush')]
 #[AsEntityListener(event: Events::postLoad, method: 'postLoad')]
-class EncryptListener
+class HashListener
 {
     public function __construct(
         private readonly EncryptService $encryptService,
@@ -51,7 +51,9 @@ class EncryptListener
                     method_exists($entity, $getMethod) &&
                     $entity->$getMethod() != null
                 ){
-                    $entity->$setMethod($this->encryptService->encryptData(strtoupper($entity->$getMethod())));
+                    if(!$this->encryptService->isHashed($entity->$getMethod())){
+                        $entity->$setMethod($this->encryptService->hashData(strtoupper($entity->$getMethod())));
+                    }
                 }
             }
         }
@@ -76,7 +78,7 @@ class EncryptListener
                     method_exists($entity, $getMethod) &&
                     $entity->$getMethod() != null
                 ){
-                    $entity->$setMethod($this->encryptService->decryptData($entity->$getMethod()));
+                    $entity->$setMethod($this->encryptService->unHashData($entity->$getMethod()));
                 }
             }
         }

@@ -68,8 +68,25 @@ class User
 }
 ```
 
-3. El bundle automáticamente:
-    - Encriptará los datos antes de guardarlos en la base de datos
+3. Usa el atributo `#[Hashed]` en las propiedades que desees hashear y poder buscar en base de datos:
+```php
+use ISerranoDev\EncryptBundle\Attribute\Hashed;
+use App\EventListener\HashListener;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity()]
+#[ORM\Table(name: 'users')]
+#[ORM\EntityListeners([HashListener::class])]
+class User
+{
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Hashed]
+    private ?string $sensitiveData = null;
+}
+```
+
+4. El bundle automáticamente:
+    - Encriptará o aplicará un hash los datos antes de guardarlos en la base de datos
     - Desencriptará los datos cuando los recuperes
     - Manejará las migraciones de Doctrine correctamente
 

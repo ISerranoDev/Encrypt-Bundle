@@ -68,8 +68,25 @@ class User
 }
 ```
 
+3. Use the `#[Hashed]` attribute on properties you want to hash and search in the database:
+```php
+use ISerranoDev\EncryptBundle\Attribute\Hashed;
+use App\EventListener\HashListener;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity()]
+#[ORM\Table(name: 'users')]
+#[ORM\EntityListeners([HashListener::class])]
+class User
+{
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Hashed]
+    private ?string $sensitiveData = null;
+}
+```
+
 3. The bundle automatically:
-   - Encrypts data before storing it in the database
+   - Encrypts or hash data before storing it in the database
    - Decrypts data when retrieving it
    - Handles Doctrine migrations correctly
 
