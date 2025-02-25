@@ -8,7 +8,7 @@ Este bundle proporciona funcionalidad de encriptación para entidades de Doctrin
 
 1. Instala el bundle usando Composer:
 ```bash
-composer require iserrano-dev/encrypt-bundle
+composer require iserranodev/encrypt-bundle
 ```
 
 2. Habilita el bundle en `config/bundles.php`:
@@ -34,10 +34,10 @@ ISD_ENCRYPT_IV=5414358938341622
 
 ### Configuración del Bundle
 
-Puedes personalizar la configuración en `config/packages/isd_encrypt.yaml`:
+Puedes personalizar la configuración en `config/packages/i_serrano_dev_encrypt.yaml`:
 
 ```yaml
-isd_encrypt:
+i_serrano_dev_encrypt:
     encryption_key_path: '%kernel.project_dir%/encryption/encryption.key'  # Ruta por defecto
     hash_key: 'TuNuevaClaveHash'    # Opcional: sobreescribe ISD_ENCRYPT_HASH_KEY
     method: 'TuNuevoMetodo'         # Opcional: sobreescribe ISD_ENCRYPT_METHOD
@@ -89,6 +89,14 @@ class User
     - Encriptará o aplicará un hash los datos antes de guardarlos en la base de datos
     - Desencriptará los datos cuando los recuperes
     - Manejará las migraciones de Doctrine correctamente
+  
+## Uso de EncryptService
+
+Puedes usar dicho servicio para encriptar o hashear diferentes textos.
+El atributo Encrypted usa los métodos hashData y unHashData para poder buscar en base de datos, pero si fuese necesario, también existe el método
+encryptData y decryptData, el cual no es recomendable para el uso de campos que se pretenden buscar.
+
+En caso de usar los métodos de encrypt, consultar la librería https://github.com/paragonie/halite, ya que el cifrado de los datos con estos métodos están desarrollados mediante dicha librería.
 
 ## Ubicación de la Clave de Encriptación
 
