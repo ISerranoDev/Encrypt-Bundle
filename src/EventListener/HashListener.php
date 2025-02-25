@@ -3,6 +3,7 @@
 namespace ISerranoDev\EncryptBundle\EventListener;
 
 use ISerranoDev\EncryptBundle\Attribute\Encrypted;
+use ISerranoDev\EncryptBundle\Attribute\Hashed;
 use ISerranoDev\EncryptBundle\Service\EncryptService;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PreFlushEventArgs;
@@ -42,7 +43,7 @@ class HashListener
         }
 
         foreach ($reflect->getProperties() as $property) {
-            if($property->getAttributes(Encrypted::class)){
+            if($property->getAttributes(Hashed::class)){
                 $propertyName = $property->getName();
                 $setMethod = "set" . ucfirst($propertyName);
                 $getMethod = "get" . ucfirst($propertyName);
@@ -69,7 +70,7 @@ class HashListener
         }
 
         foreach ($reflect->getProperties() as $property) {
-            if($property->getAttributes(Encrypted::class)){
+            if($property->getAttributes(Hashed::class)){
                 $propertyName = $property->getName();
                 $setMethod = "set" . ucfirst($propertyName);
                 $getMethod = "get" . ucfirst($propertyName);
