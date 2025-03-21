@@ -48,7 +48,7 @@ i_serrano_dev_encrypt:
 
 1. Genera la clave de encriptación (esto creará el archivo en la ruta configurada):
 ```bash
-php bin/console app:generate-key
+php bin/console iserranodev:encrypt-bundle:generate-key
 ```
 
 2. Usa el atributo `#[Encrypted]` en las propiedades que desees encriptar:
