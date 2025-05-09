@@ -19,7 +19,8 @@
     "doctrine/orm": "^2.16",
     "paragonie/halite": "^5.0",
     "symfony/console": "^6.0|^7.0",
-    "symfony/filesystem": "^6.0|^7.0"
+    "symfony/filesystem": "^6.0|^7.0",
+    "ext-mbstring": "*"
   },
   "autoload": {
     "psr-4": {

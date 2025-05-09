@@ -51,7 +51,7 @@ class EncryptListener
                     method_exists($entity, $getMethod) &&
                     $entity->$getMethod() != null
                 ){
-                    $entity->$setMethod($this->encryptService->encryptData(strtoupper($entity->$getMethod())));
+                    $entity->$setMethod($this->encryptService->encryptData(mb_strtoupper($entity->$getMethod(), 'UTF-8')));
                 }
             }
         }

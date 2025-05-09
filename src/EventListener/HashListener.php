@@ -53,7 +53,7 @@ class HashListener
                     $entity->$getMethod() != null
                 ){
                     if(!$this->encryptService->isHashed($entity->$getMethod())){
-                        $entity->$setMethod($this->encryptService->hashData(strtoupper($entity->$getMethod())));
+                        $entity->$setMethod($this->encryptService->hashData(mb_strtoupper($entity->$getMethod(), 'UTF-8')));
                     }
                 }
             }

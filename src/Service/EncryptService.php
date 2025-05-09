@@ -48,7 +48,7 @@ class EncryptService
         $key = KeyFactory::loadEncryptionKey($this->keyPath);
 
         return Crypto::encrypt(
-            new HiddenString($data),
+            new HiddenString(mb_strtoupper($data, 'UTF-8')),
             $key
         );
     }
@@ -84,7 +84,7 @@ class EncryptService
     {
 
         $ciphertext = openssl_encrypt(
-            strtoupper($data),
+            mb_strtoupper($data, 'UTF-8'),
             $this->method,
             $this->hashKey,
             OPENSSL_RAW_DATA,
