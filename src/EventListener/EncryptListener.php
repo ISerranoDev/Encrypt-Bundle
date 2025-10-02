@@ -51,7 +51,15 @@ class EncryptListener
                     method_exists($entity, $getMethod) &&
                     $entity->$getMethod() != null
                 ){
-                    $entity->$setMethod($this->encryptService->encryptData(mb_strtoupper($entity->$getMethod(), 'UTF-8')));
+
+                    $caseSensitive = (bool) @$property->getAttributes(Encrypted::class)[0]->getArguments()['caseSensitive'];
+
+                    $dataToHash = match ($caseSensitive){
+                        true => $entity->$getMethod(),
+                        false => mb_strtoupper($entity->$getMethod(), 'UTF-8')
+                    };
+
+                    $entity->$setMethod($this->encryptService->encryptData($dataToHash));
                 }
             }
         }

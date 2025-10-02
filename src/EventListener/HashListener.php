@@ -53,7 +53,16 @@ class HashListener
                     $entity->$getMethod() != null
                 ){
                     if(!$this->encryptService->isHashed($entity->$getMethod())){
-                        $entity->$setMethod($this->encryptService->hashData(mb_strtoupper($entity->$getMethod(), 'UTF-8')));
+
+                        $caseSensitive = (bool) @$property->getAttributes(Hashed::class)[0]->getArguments()['caseSensitive'];
+
+                        $dataToHash = match ($caseSensitive){
+                            true => $entity->$getMethod(),
+                            false => mb_strtoupper($entity->$getMethod(), 'UTF-8')
+                        };
+
+                        $entity->$setMethod($this->encryptService->hashData($dataToHash));
+
                     }
                 }
             }

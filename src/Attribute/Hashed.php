@@ -7,4 +7,9 @@ class Hashed
 {
     const name = 'Hashed';
 
+    public function __construct(public bool $caseSensitive = false)
+    {
+
+    }
+
 }
